@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Đo khám mắt</title>
+</head>
+<style>
+    body {
+        overflow-x: auto;
+        background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-116875.jpg?w=2000");
+        background-repeat: no-repeat;
+        background-size: 1265px 625px;
+    }
+    #dkm {
+        font-size: 30px;
+        text-shadow: 0px 2px darkseagreen;
+        color: black;
+        min-width: 126px;
+        margin-bottom: 2px;
+    }
+    .xl {
+        min-width: 110px;
+        transition-duration: 0.5s;
+        background-color: navajowhite;
+        cursor: pointer;
+    }
+    .xl:hover{
+        background-color: lightblue;
+        color: white;
+    }
+    .xl:active{
+        transform:translateY(5px);
+    }
+    #b1 {
+        border: 1px solid black;
+        border-collapse: collapse;
+        min-width: 1000px;
+        max-width: 1000px;
+    }
+    .km{
+        border-bottom: 1px solid silver;
+        padding: 5px;
+        min-width:100%;
+        background-color: cornflowerblue;
+        background-image: linear-gradient(to top, lightskyblue,lightcyan);
+    }
+    .cd1{
+        min-width: 120px;
+        width: 150px;
+       text-align: center;
+    }
+    .cd{
+        width: 80px;
+        padding-right: 5px;
+        text-align: right;
+    }
+    .td1{
+        min-width: 70px;
+        max-width: 70px;
+        margin: 5px;
+    }
+    .b2{
+        border: 1px solid black;
+        border-collapse: collapse;
+        min-width: 623px;
+        max-width: 623px;
+    }
+</style>
+<body>
+<div id="dkm">Đo Khám mắt</div>
+<hr>
+<table style="border-spacing: 10px">
+    <tr>
+        <th >
+            <input type="image" src="options.png" width="25" height="25" alt="">
+        </th>
+            <th>
+                <button class="xl"><img src="new-document.png" style="width: 20px;height: 20px" alt=" ">Thêm mới</button>
+            </th>
+            <th>
+                <button class="xl"><img src="floppy-disk.png" style="width: 20px;height: 20px" alt=" ">Cập nhật</button>
+            </th>
+            <th>
+                <button class="xl"><img src="delete.png" style="width: 20px;height: 20px" alt=" ">Xóa</button>
+            </th>
+            <th>
+                <button class="xl"><img src="printer.png" style="width: 20px;height: 20px" alt=" ">In</button>
+            </th>
+            <th>
+                <button class="xl"><img src="export.png" style="width: 20px;height: 20px" alt=" ">Phiếu xuất</button>
+            </th>
+            <th>
+                <button class="xl"><img src="down-arrow.png" style="width: 20px;height: 20px" alt=" ">Chức năng</button>
+            </th>
+            <th>
+                <button class="xl"><img src="logout.png" style="width: 20px;height: 20px" alt=" ">Thoát</button>
+            </th>
+    </tr>
+</table>
+<table id="b1" >
+    <tr>
+        <td colspan="6" class="km">Kính mắt của mã khách hàng</td>
+    </tr>
+    <tr>
+        <td class="cd1">Mã đo khám</td>
+        <td><input type="number" placeholder="221027082147"></td>
+        <td class="cd">Nhân viên</td>
+        <td style="width: 80px"><input style="max-width: 100px" type="number" placeholder="Phòng Khám "></td>
+    </tr>
+    <tr>
+        <td class="cd1">Tên bệnh nhân</td>
+        <td colspan="5"><input style="width: 700px" type="text"  placeholder="Nguyễn Văn A"></td>
+    </tr>
+    <tr>
+        <td class="cd1">Địa chỉ</td>
+        <td colspan="5"><input style="width: 700px" type="text" placeholder="........"></td>
+    </tr>
+    <tr>
+        <td class="cd1">Điện thoại</td>
+        <td style="max-width: 100px" ><input type="tel" placeholder="0912345678"></td>
+        <td class="cd">Ngày sinh</td>
+        <td style="width: 100px" ><input type="date"></td>
+        <td class="cd">Tuổi</td>
+        <td style="width: 400px"><input style="max-width: 40px" type="number" value=0></td>
+    </tr>
+    <tr>
+        <td class="cd1">Thời gian</td>
+        <td><input type="datetime-local"></td>
+        <td></td>
+    </tr>
+</table>
+<br>
+<div>
+    <table style="border: 1px solid silver;border-collapse:collapse">
+        <tr>
+            <td class="km" colspan="2">Thị lực không kính</td>
+
+        </tr>
+        <tr>
+            <td >Phải (R) <input class="td1" type="number"></td>
+            <td >Trái (L) <input class="td1" type="number"></td>
+
+        </tr>
+    </table>
+    <table style="border: 1px solid silver;border-collapse:collapse;position: relative;top:-64px;left: 310px">
+        <tr>
+            <td class="km" colspan="2">Thị lực sau kính</td>
+        </tr>
+        <tr>
+            <td>Phải (R) <input class="td1" type="number"></td>
+            <td>Trái (L) <input class="td1" type="number"></td>
+        </tr>
+    </table>
+</div>
+<table class="b2" style= "position: relative;top:-58px">
+    <tr>
+        <th class="km" style="text-align: left" colspan="7">
+            1. Độ kính cũ
+        </th>
+    </tr>
+    <tr>
+        <td  colspan="7"> Kính cũ đã sử dụng(tháng)<input class="td1" type="number"></td>
+    </tr>
+    <tr>
+        <td class="td1">Mắt</td>
+        <td class="td1">Cầu(SPH)</td>
+        <td class="td1">Trụ(CYL)</td>
+        <td class="td1">Trục(AX)</td>
+        <td class="td1">(ADD)</td>
+        <td class="td1">Thị lực(VA)</td>
+        <td class="td1">PD</td>
+    </tr>
+    <tr>
+        <td>Phải(R)</td>
+        <td ><input class="td1" type="number"></td>
+        <td ><input class="td1" type="number"></td>
+        <td ><input  class="td1" type="number"></td >
+        <td ><input class="td1" type="number"></td>
+        <td ><input class="td1" type="number"></td>
+        <td rowspan="2"><input class="td1" type="number"></td>
+    </tr>
+    <tr>
+        <td>Trái(L)</td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+    </tr>
+</table>
+<table class="b2" style=" height: 150px;position: relative;top:-208.5px;left: 629px">
+    <tr>
+        <th class="km" style="text-align: left" colspan="7">
+            3. Kính tập đeo
+        </th>
+    </tr>
+    <tr>
+        <td class="td1">Mắt</td>
+        <td class="td1">Cầu(SPH)</td>
+        <td class="td1">Trụ(CYL)</td>
+        <td class="td1">Trục(AX)</td>
+        <td class="td1">(ADD)</td>
+        <td class="td1">Thị lực(VA)</td>
+        <td class="td1">PD</td>
+    </tr>
+    <tr>
+        <td class="td1">Phải(R)</td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td rowspan="2"><input class="td1" type="number"></td>
+    </tr>
+    <tr>
+        <td class="td1">Trái(L)</td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+    </tr>
+    <tr>
+        <td colspan="3"><input type="checkbox"> Nhìn xa</td>
+        <td colspan="2"><input type="checkbox"> Nhìn gần</td>
+        <td colspan="2"><input type="checkbox"> Vi tính</td>
+    </tr>
+</table>
+<table class="b2" style= "position: relative;top:-200px">
+    <tr>
+        <th class="km" style="text-align: left" colspan="7">
+            2. Khúc xạ chủ quan
+        </th>
+    </tr>
+    <tr>
+        <td class="td1">Mắt</td>
+        <td class="td1">Cầu(SPH)</td>
+        <td class="td1">Trụ(CYL)</td>
+        <td class="td1">Trục(AX)</td>
+        <td class="td1">(ADD)</td>
+        <td class="td1">Thị lực(VA)</td>
+        <td class="td1">PD</td>
+    </tr>
+    <tr>
+        <td>Phải(R)</td>
+        <td ><input class="td1" type="number"></td>
+        <td ><input class="td1" type="number"></td>
+        <td ><input  class="td1" type="number"></td >
+        <td ><input class="td1" type="number"></td>
+        <td ><input class="td1" type="number"></td>
+        <td rowspan="2"><input class="td1" type="number"></td>
+    </tr>
+    <tr>
+        <td>Trái(L)</td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+        <td><input class="td1" type="number"></td>
+    </tr>
+</table>
+<table class="b2" style="height: 118px; position: relative;top:-317.5px;left: 629px">
+    <tr>
+        <th class="km" style="text-align: left" colspan="4">
+            4.Thông tin thêm
+        </th>
+    </tr>
+    <tr>
+        <td>Loại tròng đề nghị</td>
+        <td><input type="checkbox"> Đơn tròng<input type="checkbox"> Hai tròng<input type="checkbox"> Đa tròng</td>
+    </tr>
+    <tr>
+        <td>Kiểm tra lại tháng</td>
+        <td><input type="number"></td>
+    </tr>
+    <tr>
+        <td>Ghi chú</td>
+        <td colspan="3"><input style="width: 300px" type="text"></td>
+    </tr>
+</table>
+</body>
+</html>
