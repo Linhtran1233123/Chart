@@ -118,7 +118,7 @@
     z-index: 1;
     top:0px;
     left: 0px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.95);
 }
 .Continue input{
     position: relative;
@@ -126,4 +126,32 @@
     left: 600px;
     width: 100px;
     height: 100px;
+}
+.Complete{
+    display:none;
+    position: absolute;
+    width: 1600px;
+    height: 800px;
+    z-index: 1;
+    top:0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.9);
+}
+.Complete-content {
+    text-align: center;
+    vertical-align: center;
+    position: absolute;
+    background: linear-gradient(to bottom, white, white);
+    padding: 0;
+    top: 300px;
+    left: 500px;
+    border: 1px solid #888;
+    border-radius: 15px;
+    width: 350px;
+    height: 150px;
+}
+.mycomplete{
+    position: absolute;
+    top:80px;
+    left: 220px;
 }

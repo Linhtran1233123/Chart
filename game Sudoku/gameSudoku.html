@@ -29,7 +29,7 @@
     </div>
     <div class ="modal" id="mymodal">
       <div class="modal-content">
-          <p><span>!!!CẢNH BÁO!!!:</span>Bạn sẽ mất tiến độ trò chơi hiện tại.Bạn có muốn tiếp tục không?</p>
+          <p><span>!!!CẢNH BÁO!!!:Nếu bạn đang có phần chơi chưa hoàn thành bạn,sẽ mất tiến độ trò chơi hiện tại</span>.Bạn có muốn tiếp tục không?</p>
           <br>
           <button class="button1" onclick="createTable()"> CHƠi MỚI</button>
           <button class="button1" onclick="hidePopup()"> KHÔNG</button>
@@ -59,6 +59,13 @@
     <br>
     <br>
 </div>
+<button class="button1 mycomplete"  onclick="completeSudoku()">Hoàn thành</button>
+<div class="Complete" id="Complete1"><div class="Complete-content">
+    <p>Chúc mừng bạn đã hoàn thành phần chơi.Vui lòng nhập thông tin người chơi để cập nhật kết quả </p>
+    <input type="text">
+    <br><br>
+    <input type="button" onclick="Xacnhan()" value="Xác nhận">
+</div></div>
 </body>
 <script src="sudoku.js">
 </script>

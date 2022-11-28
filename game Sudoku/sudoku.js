@@ -83,10 +83,10 @@ function createSu(i,j){
 }
 //Tạo đề bài
 function  level() {
-    let de = [[4, 2, 4, 2, 5, 2, 4, 2, 4], [3, 4, 3, 2, 4, 2, 3, 4, 3]];
-    let tb = [[2, 4, 3, 2, 2, 3, 3, 4, 2], [3, 3, 2, 4, 1, 5, 2, 3, 3]];
-    let kho = [[3, 4, 1, 3, 2, 3, 1, 4, 3], [3, 2, 2, 3, 3, 3, 2, 2, 3]];
-    let ratkho = [[3, 2, 3, 1, 4, 1, 3, 2, 3], [2, 3, 2, 3, 2, 3, 2, 4, 0]];
+    let de = [[4, 2, 1, 3, 5, 2, 4, 2, 5], [4, 4, 3, 2, 4, 2, 3, 4, 3]];
+    let tb = [[2, 4, 3, 2, 3, 3, 3, 4, 2], [3, 3, 2, 4, 1, 5, 2, 4, 3]];
+    let kho = [[3, 4, 1, 3, 2, 3, 1, 5, 3], [4, 2, 2, 3, 3, 3, 2, 2, 3]];
+    let ratkho = [[3, 2, 3, 1, 4, 1, 3, 2, 4], [2, 3, 2, 3, 2, 3, 2, 5, 0]];
     let lev=document.getElementById("sel").value;
     if(lev == "Dễ"){return de[random(0,1)];}
     if(lev == "Trung Bình"){return tb[random(0,1)];}
@@ -121,21 +121,21 @@ function display(){
         for (let j = 0; j < debai.length; j++) {
             if (i % 3 == 2 && j % 3 == 2) {
                 if (debai[i][j] == undefined) {
-                    data += "<td style=\"border-right:2px solid black ;border-bottom:2px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
+                    data += "<td style=\"border-right:3px solid black ;border-bottom:3px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
                 } else {
-                    data += "<td  style=\"border-right:2px solid black ;border-bottom:2px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
+                    data += "<td  style=\"border-right:3px solid black ;border-bottom:3px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
                 }
             } else if (i % 3 == 2) {
                 if (debai[i][j] == undefined) {
-                    data += "<td style=\"border-bottom:2px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
+                    data += "<td style=\"border-bottom:3px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
                 } else {
-                    data += "<td  style=\"border-bottom:2px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
+                    data += "<td  style=\"border-bottom:3px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
                 }
             } else if (j % 3 == 2) {
                 if (debai[i][j] == undefined) {
-                    data += "<td style=\"border-right:2px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
+                    data += "<td style=\"border-right:3px solid black ;color: royalblue;\"  id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j +")'>" + "</td>"
                 } else {
-                    data += "<td  style=\"border-right:2px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
+                    data += "<td  style=\"border-right:3px solid black ;color: black;\" id=\"vitri" + i + j + "\"  onclick='changeBk(" + i + "," + j + ")'>" + debai[i][j] + "</td>"
                 }
             } else {
                 if (debai[i][j] == undefined) {
@@ -235,13 +235,13 @@ function checkError(i,j){
             let check = true;
             if(debai[c][b]!== undefined) {
                 for (let x = 0; x < 9; x++) {
-                    if (debai[x][b] === debai[c][b] && x != c) {
+                    if (debai[x][b] == debai[c][b] && x != c) {
                         check = false;
                         break;
                     }
                 }
                 for (let x = 0; x < 9; x++) {
-                    if (debai[c][x] === debai[c][b] && x != b) {
+                    if (debai[c][x] == debai[c][b] && x != b) {
                         check = false;
                         break;
                     }
@@ -332,7 +332,7 @@ function showKeyboard(){
 // Nhập và xóa từ bàn phím nổi
 function nhap(val){
     if (document.getElementById("vitri" + sav1 + sav2).style.color == "royalblue") {
-        debai[sav1][sav2] = val;
+        debai[sav1][sav2] = +val;
         document.getElementById("vitri" + sav1 + sav2).textContent = val;
         if (eye) {
             checkError(sav1, sav2)
@@ -347,4 +347,45 @@ function xoa(){
             checkError(sav1, sav2)
         }
     }
+}
+// Hoàn thành phần chơi
+function completeSudoku() {
+    let check = true;
+    for (let c = 0; c < 9; c++) {
+        for (let b = 0; b < 9; b++) {
+            if(debai[c][b]!== undefined) {
+                for (let x = 0; x < 9; x++) {
+                    if (debai[x][b] == debai[c][b] && x != c) {
+                        check = false;
+                        break;
+                    }
+                }
+                for (let x = 0; x < 9; x++) {
+                    if (debai[c][x] == debai[c][b] && x != b) {
+                        check = false;
+                        break;
+                    }
+                }
+                let index1 = c - c % 3, index2 = b - b % 3;
+                for (let x = index1; x <= (index1 + 2); x++) {
+                    for (let y = index2; y <= (index2 + 2); y++) {
+                        if (!(x == c && y == b)) {
+                            if (debai[x][y] == debai[c][b]) {
+                                check = false;
+                            }
+                        }
+                    }
+                }
+
+            } else{check=false}
+        }
+    }
+    if (!check) {
+        alert("Rất tiếc chưa chính xác")
+    } else {
+        document.getElementById("Complete1").style.display = "block";
+    }
+}
+function Xacnhan(){
+    document.getElementById('Complete1').style.display='none'
 }
