@@ -313,9 +313,11 @@ function countTime(){
 function pauseTime(){
     clearInterval(clock);
     document.getElementById("Continue1").style.display="block"
+    document.getElementById("blur1").style.filter="blur(10px)"
 }
 function continuePlay() {
     document.getElementById("Continue1").style.display="none"
+    document.getElementById("blur1").style.filter="blur(0px)"
     clock=setInterval(countTime,1000);
 }
 //Hiển và ẩn thị bàn phím nổi

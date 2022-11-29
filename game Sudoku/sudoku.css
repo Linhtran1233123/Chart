@@ -116,9 +116,10 @@
     width: 1600px;
     height: 800px;
     z-index: 1;
-    top:0px;
-    left: 0px;
-    background-color: rgba(0,0,0,0.95);
+    top:0;
+    left: 0;
+    background-color: rgba(0,0,0,0);
+
 }
 .Continue input{
     position: relative;
@@ -133,8 +134,8 @@
     width: 1600px;
     height: 800px;
     z-index: 1;
-    top:0px;
-    left: 0px;
+    top:0;
+    left: 0;
     background-color: rgba(0,0,0,0.9);
 }
 .Complete-content {
