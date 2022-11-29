@@ -175,6 +175,7 @@ function resetTable(){
     sav1=-1;
     sav2=-1;
     display()
+    document.getElementById("pause").style.display="block";
     time=0;
     clock=setInterval(countTime,1000) ;
 }
@@ -209,14 +210,14 @@ function changeColor(x,y){
         document.getElementById("vitri" + x + y).style.backgroundColor = "rgb(190, 219, 219)";
     }
 }
-// Tìm lỗi sai khi điền giá trị
+// Hiển thị trạng thái của nút tìm lỗi
 let eye=false;
 function findError(){
     let m=document.getElementById("smarteye");
     if (!eye){
         m.style.outlineColor="blue";
         eye=true;
-        checkError(sav1,sav2);
+        turnRed(sav1,sav2);
     }else {
         m.style.outlineColor="white";
         eye=false;
@@ -228,44 +229,42 @@ function findError(){
         }
     }
 }
-
-function checkError(i,j){
+//kiểm tra thỏa mãn điều kiện của từng ô
+function checkError1(c,b){
+    if (debai[c][b] !== undefined) {
+        for (let x = 0; x < 9; x++) {
+            if (debai[x][b] == debai[c][b] && x != c) {
+                return false;
+            }
+        }
+        for (let x = 0; x < 9; x++) {
+            if (debai[c][x] == debai[c][b] && x != b) {
+                return false;
+            }
+        }
+        let index1 = c - c % 3, index2 = b - b % 3;
+        for (let x = index1; x <= (index1 + 2); x++) {
+            for (let y = index2; y <= (index2 + 2); y++) {
+                if (!(x == c && y == b)) {
+                    if (debai[x][y] == debai[c][b]) {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+function turnRed(i,j){
     for (let c = 0; c < 9; c++) {
         for (let b = 0; b < 9; b++) {
-            let check = true;
-            if(debai[c][b]!== undefined) {
-                for (let x = 0; x < 9; x++) {
-                    if (debai[x][b] == debai[c][b] && x != c) {
-                        check = false;
-                        break;
-                    }
-                }
-                for (let x = 0; x < 9; x++) {
-                    if (debai[c][x] == debai[c][b] && x != b) {
-                        check = false;
-                        break;
-                    }
-                }
-                let index1 = c - c % 3, index2 = b - b % 3;
-                for (let x = index1; x <= (index1 + 2); x++) {
-                    for (let y = index2; y <= (index2 + 2); y++) {
-                        if (!(x == c && y == b)) {
-                            if (debai[x][y] == debai[c][b]) {
-                                check = false;
-                            }
-                        }
-                    }
-                }
-                if (check == false) {
+                if (!checkError1(c,b)) {
                     document.getElementById("vitri" + c + b).style.backgroundColor = "red"
                 } else if (document.getElementById("vitri" + c + b).style.backgroundColor == "red") {
                     document.getElementById("vitri" + c + b).style.backgroundColor = "white"
                 }
-            }else if (document.getElementById("vitri" + c + b).style.backgroundColor == "red") {
-                document.getElementById("vitri" + c + b).style.backgroundColor = "white"
             }
         }
-    }
     changeColor(i,j)
 }
 // sự kiện click vào ô
@@ -289,13 +288,14 @@ function changeValue(event) {
         document.getElementById("vitri" + sav1 + sav2).textContent = "";
     }
     if (eye) {
-        checkError(sav1, sav2)
+        turnRed(sav1, sav2)
     }
 }
 // đưa gợi ý
 function getHint(){
     debai[sav1][sav2]=a[sav1][sav2];
     document.getElementById("vitri" + sav1 + sav2).textContent =a[sav1][sav2];
+    if(eye){turnRed(sav1,sav2)}
 }
 // Hiện bộ đếm
 let time=0;
@@ -335,7 +335,7 @@ function nhap(val){
         debai[sav1][sav2] = +val;
         document.getElementById("vitri" + sav1 + sav2).textContent = val;
         if (eye) {
-            checkError(sav1, sav2)
+            turnRed(sav1, sav2)
         }
     }
 }
@@ -344,48 +344,25 @@ function xoa(){
         debai[sav1][sav2] = undefined;
         document.getElementById("vitri" + sav1 + sav2).textContent = "";
         if (eye) {
-            checkError(sav1, sav2)
+            turnRed(sav1, sav2)
         }
     }
 }
 // Hoàn thành phần chơi
 function completeSudoku() {
-    let check = true;
     for (let c = 0; c < 9; c++) {
         for (let b = 0; b < 9; b++) {
-            if(debai[c][b]!== undefined) {
-                for (let x = 0; x < 9; x++) {
-                    if (debai[x][b] == debai[c][b] && x != c) {
-                        check = false;
-                        break;
-                    }
-                }
-                for (let x = 0; x < 9; x++) {
-                    if (debai[c][x] == debai[c][b] && x != b) {
-                        check = false;
-                        break;
-                    }
-                }
-                let index1 = c - c % 3, index2 = b - b % 3;
-                for (let x = index1; x <= (index1 + 2); x++) {
-                    for (let y = index2; y <= (index2 + 2); y++) {
-                        if (!(x == c && y == b)) {
-                            if (debai[x][y] == debai[c][b]) {
-                                check = false;
-                            }
-                        }
-                    }
-                }
-
-            } else{check=false}
+            checkError1(c, b);
+            if (!checkError1(c, b)) {
+                return alert("Rất tiếc chưa chính xác")
+            }
         }
     }
-    if (!check) {
-        alert("Rất tiếc chưa chính xác")
-    } else {
-        document.getElementById("Complete1").style.display = "block";
-    }
+     return document.getElementById("Complete1").style.display = "block";
+
 }
 function Xacnhan(){
     document.getElementById('Complete1').style.display='none'
+    clearInterval(clock);
+    document.getElementById("pause").style.display="none";
 }
