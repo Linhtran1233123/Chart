@@ -63,11 +63,11 @@
 <button class="button1 mycomplete"  onclick="completeSudoku()">Hoàn thành</button>
 <div class="Complete" id="Complete1"><div class="Complete-content">
     <p>Chúc mừng bạn đã hoàn thành phần chơi.Vui lòng nhập thông tin người chơi để cập nhật kết quả </p>
-    <br><br>
+    <input id="name" onchange="addWinner()" type="text" placeholder="Nguyễn Văn A"><br><br>
     <input type="button" onclick="Xacnhan()" value="Xác nhận">
 </div></div></div>
 <div class="Continue" id="Continue1"><input alt="" onclick="continuePlay()" type="image" src="play-button.png" ></div>
 </body>
-<script src="sudoku.js">
-</script>
+<script src="sudoku.js"></script>
+<!--<script src="scoreTable.js"></script>-->
 </html>

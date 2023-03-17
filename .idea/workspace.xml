@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="20f17a06-e692-4466-accd-414ba06bba79" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/javaproject/Hello world/src/demo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/New folder.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game Sudoku/demo4.html" beforeDir="false" afterPath="$PROJECT_DIR$/game Sudoku/demo4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game Sudoku/gameSudoku.html" beforeDir="false" afterPath="$PROJECT_DIR$/game Sudoku/gameSudoku.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MU60Pz8OsqIKghjcZlyIDo4cns" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20f17a06-e692-4466-accd-414ba06bba79" name="Changes" comment="" />
+      <created>1677809590394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677809590394</updated>
+      <workItem from="1677809591919" duration="2533000" />
+      <workItem from="1678076532983" duration="5849000" />
+      <workItem from="1678123615794" duration="2415000" />
+      <workItem from="1678244481216" duration="3487000" />
+      <workItem from="1678349032064" duration="3639000" />
+      <workItem from="1678373413873" duration="3029000" />
+      <workItem from="1678410629882" duration="11511000" />
+      <workItem from="1678450172824" duration="1684000" />
+      <workItem from="1678501705845" duration="33945000" />
+      <workItem from="1678582286072" duration="13874000" />
+      <workItem from="1678635311313" duration="6358000" />
+      <workItem from="1678670843138" duration="17288000" />
+      <workItem from="1678700958015" duration="2241000" />
+      <workItem from="1678725960683" duration="2857000" />
+      <workItem from="1678755472921" duration="19749000" />
+      <workItem from="1678811023618" duration="1193000" />
+      <workItem from="1678842347845" duration="12195000" />
+      <workItem from="1678866784556" duration="5607000" />
+      <workItem from="1678897996689" duration="4522000" />
+      <workItem from="1678929333596" duration="20228000" />
+      <workItem from="1678966926002" duration="14468000" />
+      <workItem from="1679018502499" duration="10016000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/demooo.html</url>
+          <line>139</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/jquery_demo.html</url>
+          <line>330</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JavascriptDebugType">
+        <watch expression="chart.data" language="JavaScript" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý sản phẩm</title>
+    <style>
+        th, td {
+            border: 1px solid silver;
+            height: 70px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        body{
+            background-color: honeydew;
+        }
+    </style>
+</head>
+<body>
+<button onclick="createProduct()">Nhập danh sách sản phẩm</button>
+<p>Thêm sản phẩm</p>
+<input type="text" id="newproduct">
+<button onclick="addProduct()">Xác nhận</button>
+<br><br>
+<button onclick="createTable()">Hiện\Cập nhật danh sách</button>
+<div id="danhsach"></div>
+</body>
+<script>
+    const product = []
+    let stt=0
+    function createProduct() {
+        let a = product.length, n = prompt("NHẬP TÊN SẢN PHẨM THỨ " + (a + 1))
+        while (n != "ok") {
+            product[a] = n;
+            a += 1;
+            n = prompt("NHẬP TÊN SẢN PHẨM THỨ " + (a + 1))
+        }
+    }
+
+    function addProduct() {
+        if (product.indexOf(document.getElementById("newproduct").value) == -1) {
+            product[product.length] = document.getElementById("newproduct").value
+            alert("Thêm sản phẩm thành công")
+        } else {
+            alert("Sản phẩm đã tồn tại.Xin hãy nhập lại sản phẩm khác")
+        }
+    }
+
+    function createTable() {
+        let data = "";
+        data += "<table style='border: 1px solid silver;border-collapse: collapse;width: 50%'>" + "<tr><th>STT</th><th colspan='3'>Product name</th></tr>"
+        for (let i = 0; i < product.length; i++) {
+            data += "<tr><th>" + (i + 1) + "</th><th>" + product[i] + "</th><th><button style='background-color: red' onclick='deleteProduct("+i+")'>Delete</button></th><th><button style='background-color: lightblue' onclick='editProduct("+i+")'>Edit</button></th></tr>"
+        }
+        data += "</table>"
+        document.getElementById("danhsach").innerHTML = data
+    }
+
+    function deleteProduct(i){
+           product.splice(i,1)
+        return createTable()
+    }
+     function editProduct(i){
+        product[i]=prompt("Nhập tên muốn sửa")
+         return createTable()
+     }
+</script>
+</html>

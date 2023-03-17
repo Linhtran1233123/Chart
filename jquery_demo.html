@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .date-bar{
+            width: 100%;
+            display:inline-block;
+        }
+        .date-bar li {
+            position: relative;
+            /*border: 1px solid ;*/
+            width: 100px;
+            height: 50px;
+            display: inline;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            box-shadow: 0px 2px 3px grey;
+        }
+        .date-bar ul{
+            list-style-type: none;
+        }
+        .date-bar li{
+            float:left;
+        }
+        .date-bar li:hover{
+            background-color: #a6a3a3;
+        }
+        .date-bar #dateChoose:hover{
+            background-color: #ffffff;
+        }
+        .date-bar li p{
+        position: relative;
+            margin-top: 11px;
+        }
+        #title-bar{
+            width: 500px;
+        }
+        .chart-container{
+            margin-top: -25px;
+            display: inline-block;
+            position: relative;
+            height:300px;
+            width:600px;
+            top:40px;
+            border: 1px solid #F44336;
+            border-radius: 8px;
+            left: 20px;
+        }
+        .chartType-bar{
+            position: absolute;
+            display: block;
+            top: 96px;
+            left: 527px;
+            z-index: 1;
+        }
+
+        .chartType-bar button{
+            border: 1px solid #ffffff ;
+            border-radius: 8px;
+            position: relative;
+            width: 100px;
+            height: 50px;
+            display: none;
+            background-color:#ffffff;
+            box-shadow: 0px 2px 3px grey;
+        }
+        .chartType-bar #selectType{
+            display: block;
+        }
+        .chartType-bar:hover .chartType{
+            display: block;
+        }
+        .chartType-bar button:hover{
+            background-color: #a6a3a3;
+        }
+        .chart-container{
+            position: relative;
+            height:360px;
+            width:600px;
+            top:40px
+        }
+        #dateChoose{
+            width: 185px;
+        }
+        #dateChoose p{
+            margin-bottom: 21px;
+        }
+        .dateChoice{
+            position: relative;
+            border: 1px solid white;
+            height: 64px;
+            width: 185px;
+            left: 940px;
+            top: 1px;
+            display: none;
+        }
+        .dateChoice button{
+            width: 185px;
+        }
+        .dateChoice input{
+            width: 180px;
+        }
+        .detailChartContent{
+            display: inline-block;
+            position: relative;
+            height:360px;
+            width:600px;
+            top:-135px;
+            border: 1px solid #F44336;
+            border-radius: 8px;
+            left: 20px;
+        }
+        .statistical{
+            display: inline-block;
+            position: relative;
+            height: 185px;
+            width: 280px;
+            top: 40px;
+            border: 1px solid #F44336;
+            border-radius: 8px;
+            left: 10px;
+        }
+
+        .detailChart{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #F44336;
+            border-radius: 8px;
+            left: 10px;
+            top: 40px;
+            width: 290px;
+            height: 185px;
+        }
+
+        #detailChart{
+            display: block;
+            height: 185px;
+            width: 290px;
+        }
+      .myChart{
+            display: block;
+            box-sizing: border-box;
+            height: 250px;
+            width: 500px;
+            position: relative;
+            top: 40px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <div class="date-bar">
+        <ul>
+            <li id="title-bar"><p>Thống kê chi tiêu,lợi nhuận</p></li>
+            <li id="date"><p>Ngày hôm nay</p></li>
+            <li id="week"><p>Theo tuần</p></li>
+            <li id="months"><p>Theo các tháng</p></li>
+            <li id="year"><p>Năm nay</p></li>
+            <li id="dateChoose">
+                <p>Chọn khoảng thời gian </p>
+            </li>
+        </ul>
+            <div class="dateChoice">
+                <input id="startDate" type="date"><br>
+                <input id="endDate" type="date"><br>
+                <button>Confirm</button>
+            </div>
+    </div>
+    <div class="chartType-bar">
+        <button id="selectType" name="bar">Chart type: bar</button>
+        <button class="chartType" name="pie">Click to switch to pie chart!</button>
+        <button class="chartType" name="bar" >Click to switch to bar chart!</button>
+        <button class="chartType" name="line">Click to switch to line chart!</button>
+    </div>
+    <div class="chart-container" >
+        <div class="myChart">
+            <canvas id="myChart" ></canvas>
+        </div>
+    </div>
+    <div class="detailChartContent">
+        <div class="detailChart">
+            <canvas id="detailChart"></canvas>
+        </div>
+        <div class="statistical">
+            <p></p><br>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const ctx = document.getElementById('myChart');
+    let type='bar';
+    let labels=[];
+    let data=[];
+    let choice;
+    let mySelect;
+    let myChartMetasetIndex=-1;
+    let chart1;
+    const data1 = [
+        { year: 2010, count: 10 },
+        { year: 2011, count: 20 },
+        { year: 2012, count: 15 },
+        { year: 2013, count: 25 },
+        { year: 2014, count: 22 },
+        { year: 2015, count: 30 },
+        { year: 2016, count: 28 },
+    ];
+    let chart=new Chart(
+        ctx,
+        {
+            type: 'bar',
+            options:{
+                maintainAspectRatio: false,
+                aspectRatio:2,
+                scales:{
+                    y:{
+                        min:0
+                    }
+                },
+                plugins:{
+                    legend:{
+                        display: false
+                    }
+                }
+            },
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Acquisitions by year',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 240, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                        ]
+                    }
+                ]
+            }
+        }
+    );
+    // lấy dữ liệu
+    $(function (){$(".date-bar li").click(function(){
+        $(this).animate({top:'+=3px'}, "fast",function (){
+            $(this).css({"box-shadow":"0px 0px white","background-color": "#a6a3a3"})
+        });
+        $(this).animate({top:'-=3px'},"fast",function (){
+            $(this).css({"box-shadow":"0px 2px 3px grey","background-color": "#ffffff"})
+        });
+        $(this).hover(function (){
+            $(this).css("background-color", "#a6a3a3")
+        },
+            function (){
+                $(this).css("background-color", "#ffffff")
+            }
+        )
+        if($(this).attr("id")!=="dateChoose"){
+            choice=$(this).attr("id")
+        }
+        if(choice==="date"){
+            let d=new Date(new Date().valueOf()+7*60*60*1000);
+            let string=d.toISOString().slice(0,10)
+        $.getJSON("http://localhost:8080/cash/search/"+string+"T00:00:00/"+string+"T23:59:59",
+            function (result) {
+                let dataIn=[];
+                let dataOut=[];
+                let arr = result;
+                let title='Biểu đồ thống kê thu nhập chi tiêu ngày';
+                labels=[];
+                // createChartInfo(choice,arr)
+                dataIn.push(arr[0][2])
+                dataOut.push(arr[1][2])
+                labels.push(d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear());
+                title+=labels;
+                createChart(dataIn,dataOut,type,labels,title)
+            })
+            } else
+            if( choice ==="week"){
+                labels=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+                let d=new Date(new Date().valueOf()+7*60*60*1000);
+                let milli=24*60*60*1000;
+                let index=d.getDay();
+                if(index===0){
+                    index=6;
+                }else{
+                    index-=1;
+                }
+                for(let i=0;i<7;i++){
+                    if(i===index){
+                        labels[i]+="("+d.toISOString().slice(0,10)+")";
+                    } else {
+                        if (i < index) {
+                            let d1= new Date(d.valueOf()-milli*(index-i));
+                            labels[i]+="("+d1.toISOString().slice(0,10)+")";
+                        } else {
+                            let d1= new Date(d.valueOf()+milli*(i-index));
+                            labels[i]+="("+d1.toISOString().slice(0,10)+")";
+                        }
+                    }
+                }
+                $.getJSON("http://localhost:8080/cash/search/"+labels[0].slice(7,17)+"T00:00:00/"+labels[6].slice(7,17)+"T23:59:59",
+                function (result){
+                    let title='Biểu đồ thống kê thu nhập chi tiêu từ '+labels[0].slice(7,17)+" đến "+labels[6].slice(7,17);
+                    let dataIn=[0,0,0,0,0,0,0];
+                    let dataOut=[0,0,0,0,0,0,0];
+                    for(let i=0;i<result.length;i++) {
+                        let d=new Date(new Date().valueOf()+7*60*60*1000);
+                        for (let j = 0; j<labels.length; j++)
+                        {
+                            let d1= new Date(d.valueOf()-milli*(index-j));
+                            if(result[i][1]===d1.toISOString().slice(0,10))
+                            if (result[i][0] === "income") {
+                                dataIn[j]+=result[i][2]
+                            } else {
+                                dataOut[j]+=result[i][2]
+                            }
+                        }
+                    }
+                    createChart(dataIn,dataOut,type,labels,title)
+                })
+            }else
+                if(choice === "months"){
+                    labels=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    let d=new Date(""+new Date().getFullYear());
+                    $.getJSON("http://localhost:8080/cash/search/"+d.toISOString().slice(0,10)+"T00:00:00/"+new Date(new Date().valueOf()+7*60*60*1000).toISOString().slice(0,10)+"T23:59:59",
+                        function (result){
+                            let title="Biểu đồ thống kê thu nhập chi tiêu theo các tháng trong năm "+d.getFullYear()
+                            let dataIn=[0,0,0,0,0,0,0,0,0,0,0,0];
+                            let dataOut=[0,0,0,0,0,0,0,0,0,0,0,0];
+                            for (let i=0;i<result.length;i++){
+                                if(result[i][0]==="income"){
+                                    dataIn[parseInt(result[i][1].slice(5,7))-1]+=result[i][2]
+                                    }else{
+                                    dataOut[parseInt(result[i][1].slice(5,7))-1]+=result[i][2]
+                                }
+                                }
+                            createChart(dataIn,dataOut,type,labels,title)
+                    })
+                } else if(choice === "year"){
+$.getJSON("http://localhost:8080/cash/searchByYear/",
+    function (result){
+    labels=[];
+        let dataIn=[];
+        let dataOut=[];
+        let title="Biểu đồ thống kế theo các năm"
+        for(let i=0;i<result.length;i++){
+            if(result[i][0]==="income"){
+               dataIn.push(result[i][2])
+            }else{
+                dataOut.push(result[i][2])
+            }
+            if(i%2===0){
+                labels.push(result[i][1])
+            }
+        }
+        createChart(dataIn,dataOut,type,labels,title)
+    })}
+    })})
+    $(function(){
+        $(".chartType-bar button").click(function (){
+            $(".chartType-bar #selectType").text("Chart type: "+$(this).attr("name"))
+            $(".chartType-bar #selectType").attr("name",$(this).attr("name"))
+            type=$(this).attr("name")
+            chart.config.type=type;
+            chart.update();
+        })
+    })
+    $(function (){
+        $("#dateChoose").click(function (){
+            let dc=$(".dateChoice").css("display");
+            if(dc==="none"){
+                $("#startDate").val("")
+                $("#endDate").val("")
+                $(".dateChoice").css("display","inline-block")
+                $(".chartType-bar").css("top","160px")
+            }else{
+                $(".dateChoice").css("display","none")
+                $(".chartType-bar").css("top","96px")
+            }
+            }
+        )
+    })
+    $(function (){
+        $(".dateChoice button").click(function (){
+                if( $("#startDate").val()!=="" && $("#endDate").val()!==""){
+                    choice="chooseDate"
+                    let startDate = new Date($("#startDate").val()+"T07:00:00")
+                    let endDate = new Date($("#endDate").val()+"T07:00:00")
+                    if(startDate.valueOf()<endDate.valueOf()){
+                        $.getJSON("http://localhost:8080/cash/search/"+startDate.toISOString().slice(0,10)+"T00:00:00/"+endDate.toISOString().slice(0,10)+"T23:59:59",
+                            function (result){
+                                    labels=[];
+                                    let dataIn=[];
+                                    let dataOut=[];
+                                    let milli=24*60*60*1000;
+                                    while(startDate.valueOf()<=endDate.valueOf()){
+                                        labels.push(startDate.getDate()+"/"+(startDate.getMonth()+1)+"/"+startDate.getFullYear());
+                                        dataIn.push(0)
+                                        dataOut.push(0)
+                                        startDate=new Date(startDate.valueOf()+milli);
+                                    }
+                                    let title="Biểu đồ thống kế theo chi tiêu thu nhập từ ngày "+labels[0]+" đến ngày "+labels[labels.length-1]
+                                    for (let i=0;i<result.length;i++){
+                                    let d= new Date(result[i][1])
+                                    let temp=d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+                                    for (let j=0;j<labels.length;j++){
+                                        if(labels[j]===temp){
+                                            if (result[i][0]==="income"){
+                                                dataIn[j]+=result[i][2]
+                                            } else{
+                                                dataOut[j]+=result[i][2]
+                                            }
+                                        }
+                                    }
+                                }
+                                createChart(dataIn,dataOut,type,labels,title)
+                            })
+                }
+                }else
+            if( $("#startDate").val()!=="" || $("#endDate").val()!=="") {
+                choice="chooseDate"
+                let d;
+                 if($("#startDate").val()!==""){
+                     d= new Date($("#startDate").val()+"T07:00:00");
+                 } else {
+                     d= new Date($("#endDate").val()+"T07:00:00");
+                 }
+                $.getJSON("http://localhost:8080/cash/search/"+d.toISOString().slice(0,10)+"T00:00:00/"+d.toISOString().slice(0,10)+"T23:59:59",
+                    function (result){
+                        labels=[];
+                        let dataIn=[];
+                        let dataOut=[];
+                        let title="Biểu đồ thống kế theo chi tiêu thu nhập ngày "
+                            dataIn.push(result[0][2])
+                        dataOut.push(result[1][2])
+                        labels.push(d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear());
+                        title+=labels;
+                        createChart(dataIn,dataOut,type,labels,title)
+                    })
+            }
+            $(".chartType-bar").css("top","96px")
+            $(".dateChoice").css("display","none")
+        })
+    })
+  //  Tạo đối tượng biểu đồ
+  function createChart(data1,data2,type,labels,title) {
+        chart.destroy();
+        chart=new Chart(
+            ctx,
+            {
+                type: type,
+                options:{
+                    maintainAspectRatio: false,
+                    plugins:{
+                    },
+                    aspectRatio:2,
+                    scales:{
+                    //     // x:{
+                    //     //     ticks:{
+                    //     //         callback:value=>value+ 'm'
+                    //     //     }
+                    //     // },
+                        y:{
+                            min:0
+                            // ticks:{
+                            //     callback:value=>value
+                            // }
+                        }
+                    },
+                    plugins : {
+                        title: {
+                            display: true,
+                            text: title
+                        }
+                    },onClick: (e) => {
+                        for (let j = 0; j < chart._metasets.length; j++) {
+                            let chartElementArr = chart._metasets[j].data;
+                            if (chart.config.type === 'bar') {
+                                for (let i = 0; i < chartElementArr.length; i++) {
+                                    let xMin = (2 * chartElementArr[i].x - chartElementArr[i].width) / 2;
+                                    let xMax = (2 * chartElementArr[i].x + chartElementArr[i].width) / 2;
+                                    if (e.x >= xMin && e.x <= xMax && e.y > (chartElementArr[i].base - chartElementArr[i].height) && e.y <= chartElementArr[i].base) {
+                                        if (mySelect !== i||(mySelect==i&&myChartMetasetIndex!==j)) {
+                                            mySelect = i;
+                                            myChartMetasetIndex=j;
+                                            createDetailChart(mySelect,myChartMetasetIndex);
+                                            break;
+                                        } else {
+                                            chart1.destroy();
+                                            mySelect = -1;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            } else {
+                                let radius = chartElementArr[j].options.radius
+                                for (let i = 0; i < chartElementArr.length; i++) {
+                                    let x = chartElementArr[i].x;
+                                    let y = chartElementArr[i].y;
+                                    if (e.x >= (x - radius) && e.x <= (x + radius) && e.y >= (y - radius) && e.y <= (y + radius)) {
+                                        if (mySelect !== i||(mySelect==i&&myChartMetasetIndex!==j)) {
+                                            mySelect = i;
+                                            myChartMetasetIndex=j;
+                                            createDetailChart(mySelect,myChartMetasetIndex);
+                                            break;
+                                        } else {
+                                            $(".statistical div table").css("display","none")
+                                            chart1.destroy();
+                                            mySelect = -1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    },
+                data: {
+                    labels: labels,
+                    datasets: [
+                        // {fill: 0} ,
+                        {
+                            label: 'Income Money',
+                            data: data1,
+                             backgroundColor: ['green']
+                            // backgroundColor: [
+                            //     'rgba(255, 99, 132, 0.2)',
+                            //     'rgba(255, 159, 240, 0.2)',
+                            //     'rgba(255, 205, 86, 0.2)',
+                            //     'rgba(75, 192, 192, 0.2)',
+                            //     'rgba(54, 162, 235, 0.2)',
+                            //     'rgba(153, 102, 255, 0.2)',
+                            //     'rgba(201, 203, 207, 0.2)'
+                            // ]
+                        },
+                        {
+                            label: 'Outcome Money',
+                            data: data2,
+                            backgroundColor: ['yellow']
+                        }
+                    ]
+                }
+            }
+        );
+    };
+    function createDetailChart(mySelect,myMetaIndex) {
+        let labels1 = []
+        let data1 = []
+        let type
+        if (myMetaIndex === 0) {
+            type = "income"
+        } else {
+            type = "outcome"
+        }
+        if (choice === "date") {
+            let d = new Date(new Date().valueOf() + 7 * 60 * 60 * 1000);
+            let string = d.toISOString().slice(0, 10)
+            $.getJSON("http://localhost:8080/cash/chartDetail/" + string + "T00:00:00/" + string + "T23:59:59/" + type,
+                function (result) {
+                    for (let i = 0; i < result.length; i++) {
+                        labels1.push(result[i][0]);
+                        data1.push(result[i][1])
+                    }
+                    createDetailChartTable(type,result)
+                    createChart2(labels1, data1)
+                })
+        } else if (choice === "week") {
+            $.getJSON("http://localhost:8080/cash/chartDetail/" + labels[mySelect].slice(labels[mySelect].length - 11, labels[mySelect].length - 1) + "T00:00:00/" + labels[mySelect].slice(labels[mySelect].length - 11, labels[mySelect].length - 1) + "T23:59:59/" + type,
+                function (result) {
+                    for (let i = 0; i < result.length; i++) {
+                        labels1.push(result[i][0]);
+                        data1.push(result[i][1])
+                    }
+                    createDetailChartTable(type,result)
+                    createChart2(labels1, data1)
+                })
+        } else if (choice === "months") {
+            let d = new Date(new Date().getFullYear(), mySelect);
+            let d1 = new Date(new Date().getFullYear(), mySelect + 1);
+            $.getJSON("http://localhost:8080/cash/chartDetail/" + d.toISOString().slice(0, 10) + "T00:00:00/" + new Date(d1.valueOf() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10) + "T23:59:59/" + type,
+                function (result) {
+                    for (let i = 0; i < result.length; i++) {
+                        labels1.push(result[i][0]);
+                        data1.push(result[i][1])
+                    }
+                    createDetailChartTable(type,result)
+                    createChart2(labels1, data1)
+                })
+        } else if (choice === "year") {
+            let d = new Date("" + labels[mySelect])
+            let d1 = new Date(parseInt(labels[mySelect]) + 1 + "")
+            $.getJSON("http://localhost:8080/cash/chartDetail/" + d.toISOString().slice(0, 10) + "T00:00:00/" + new Date(d1.valueOf() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10) + "T23:59:59/" + type,
+                function (result) {
+                    for (let i = 0; i < result.length; i++) {
+                        labels1.push(result[i][0]);
+                        data1.push(result[i][1])
+                    }
+                    createDetailChartTable(type,result)
+                    createChart2(labels1, data1)
+                })
+        } else {
+            let s =labels[mySelect];
+            let temp=s.split("/")
+                  let d=new Date(new Date(temp[2]+"/"+temp[1]+"/"+temp[0]).valueOf()+7 * 60 * 60 * 1000)
+                    $.getJSON("http://localhost:8080/cash/chartDetail/" + d.toISOString().slice(0, 10) + "T00:00:00/" + d.toISOString().slice(0, 10) + "T23:59:59/"+type,
+                        function (result) {
+                            for (let i = 0; i < result.length; i++) {
+                                labels1.push(result[i][0]);
+                                data1.push(result[i][1])
+                            }
+                            createDetailChartTable(type,result)
+                            createChart2(labels1, data1)
+                        })
+                }
+    }
+    function createDetailChartTable(type,arr){
+       let ctx= `<table style="border: 1px solid black"><tr><td>Category</td><td>Money</td></tr>`
+          for (let i=arr.length-1;i>=0;i--){
+              ctx+=`<tr><td>${arr[i][0]}</td><td>${arr[i][1]}</td></tr>`
+          }
+        ctx+='</table>';
+          $(".statistical div").html(ctx);
+    }
+      function  createChart2(labels1,data1){
+            if (chart1 !== undefined) {
+                chart1.destroy();
+            }
+            chart1 = new Chart(
+                document.getElementById("detailChart"),
+                {
+                    type: "pie",
+                    options: {
+                        maintainAspectRatio: false,
+                    },
+                    data: {
+                        labels: labels1,
+                        datasets: [
+                            {
+                                label: "",
+                                data: data1,
+                                backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 240, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',]
+                            }
+                        ]
+                    }
+                }
+            )
+    }
+</script>
+</body>
+</html>
